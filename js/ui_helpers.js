@@ -7,6 +7,7 @@ app.registerExtension({
     let orig_dblClick = node.onDblClick;
     node.onDblClick = function (e, pos, self) {
       orig_dblClick?.apply?.(this, arguments);
+      if(pos[1] > 0) return;
       let prompt = window.prompt("Title", this.title);
       if (prompt) { this.title = prompt; }
     }
