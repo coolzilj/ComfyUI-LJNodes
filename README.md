@@ -28,6 +28,11 @@ Restart ComfyUI and the extension should be loaded.
 ## Usage
 
 ### UI Helpers (Shortcuts for Common Actions)
+
+
+https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/3e410b0f-edda-4411-b35a-a252119ac7b7
+
+
 1. `Ctrl+G` to add a group for selected nodes.
 2. `Double-click` the group title to edit.
 3. `Double-click` the node title to edit.
