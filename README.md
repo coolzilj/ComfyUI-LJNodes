@@ -33,9 +33,10 @@ Restart ComfyUI and the extension should be loaded.
 https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/3e410b0f-edda-4411-b35a-a252119ac7b7
 
 
-1. `Ctrl+G` to add a group for selected nodes.
-2. `Double-click` the group title to edit.
-3. `Double-click` the node title to edit.
+1. `Ctrl + G` to add a group for selected nodes.
+2. `Ctrl + Q` to call `Queue Selected Output Nodes (rgthree)` ([rgthree-comfy](https://github.com/rgthree/rgthree-comfy) required)
+2. `Double Click` the group title to edit.
+3. `Double Click` the node title to edit.
 
 ## Last but not lease
 If you find it useful or have special needs in your workflow, I'm open to your feedback.  
