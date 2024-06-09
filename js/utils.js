@@ -76,3 +76,27 @@ export function addNodesToGroup(group, nodes=[]) {
   group.pos = [x1 - padding, y1 - padding];
   group.size = [x2 - x1 + padding * 2, y2 - y1 + padding * 2];
 }
+
+/**
+ * A default version of the logic for nodes that do not set `getSlotMenuOptions`.
+ * This is necessary because when child nodes define `getSlotMenuOptions`, LiteGraph won't apply its default logic.
+ */
+
+export function defaultGetSlotMenuOptions(slot) {
+  const menu_info = [];
+  if (slot?.output?.links?.length) {
+    menu_info.push({ content: "Disconnect Links", slot: slot });
+  }
+  let inputOrOutput = slot.input || slot.output;
+  if (inputOrOutput) {
+    if (inputOrOutput.removable) {
+      menu_info.push(
+        inputOrOutput.locked ? { content: "Cannot remove" } : { content: "Remove Slot", slot },
+      );
+    }
+    if (!inputOrOutput.nameLocked) {
+      menu_info.push({ content: "Rename Slot", slot });
+    }
+  }
+  return menu_info;
+}

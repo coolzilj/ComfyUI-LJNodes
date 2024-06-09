@@ -1,5 +1,5 @@
 import { app } from "../../scripts/app.js";
-import { clickedOnGroupTitle, addNodesToGroup, getOutputNodesFromSelected } from "./utils.js";
+import { clickedOnGroupTitle, addNodesToGroup, getOutputNodesFromSelected, defaultGetSlotMenuOptions } from "./utils.js";
 
 app.registerExtension({
   name: "Comfy.LJNodes.UIHelpers",
@@ -89,3 +89,33 @@ LGraphCanvas.prototype.processKey = function(e) {
 
   return origProcessKey.apply(this, arguments);
 };
+
+// NOTE: LGraphNode.prototype.getSlotMenuOptions does not exist, no need to override.
+LGraphNode.prototype.getSlotMenuOptions = function (slot) {
+  let options = defaultGetSlotMenuOptions(slot);
+
+  if (slot.output.links.length) {
+    options.push({
+      content: "Add Reroute in between",
+      callback: () => {
+        // create a reroute node
+        let reroute = LiteGraph.createNode("Reroute");
+        reroute.pos = [this.pos[0] + this.size[0] + 24, this.pos[1]];
+        app.graph.add(reroute, false);
+        // copy the connections to the reroute node
+        let links = [...slot.output.links];
+        for (let i in links) {
+            let link = app.graph.links[links[i]];
+            let target_node = app.graph.getNodeById(link.target_id);
+            reroute.connect(0, target_node, link.target_slot);
+        }
+        // disconnect the original node
+        this.disconnectOutput(slot.slot);
+        // connect to the new reroute node
+        this.connect(slot.slot, reroute, 0);
+        app.graph.afterChange();
+      },
+    });
+  }
+  return options;
+}
