@@ -39,6 +39,12 @@ https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/52abe438-8758-4e05-81
 
 4. `Ctrl + Q` to call `Queue Selected Output Nodes (rgthree)` ([rgthree-comfy](https://github.com/rgthree/rgthree-comfy) required)
 
+
+https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/2675699e-dce5-4c82-9c60-77fc9f893aef
+
+
+5. `Rright Click` on slots to call `Add Reroute in between` in the slot menu options.
+
 ## Last but not lease
 If you find it useful or have special needs in your workflow, I'm open to your feedback.  
 Twitter: [@SongZi](https://x.com/Songzi39590361)
