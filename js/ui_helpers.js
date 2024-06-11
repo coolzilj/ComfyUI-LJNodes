@@ -94,7 +94,7 @@ LGraphCanvas.prototype.processKey = function(e) {
 LGraphNode.prototype.getSlotMenuOptions = function (slot) {
   let options = defaultGetSlotMenuOptions(slot);
 
-  if (slot.output.links?.length) {
+  if (slot.output?.links?.length) {
     options.push({
       content: "Add Reroute in between",
       callback: () => {
