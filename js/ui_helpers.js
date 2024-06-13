@@ -1,16 +1,38 @@
 import { app } from "../../scripts/app.js";
 import { clickedOnGroupTitle, addNodesToGroup, getOutputNodesFromSelected, defaultGetSlotMenuOptions } from "./utils.js";
 
+const LJNODES_NODE_TITLE_EDIT_TRIGGER = "Comfy.LJNodes.UIHelpers.NodeTitleEditTrigger";
+const LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT = "Double Click";
+
 app.registerExtension({
   name: "Comfy.LJNodes.UIHelpers",
+
+  init() {
+    const defaultTrigger = LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT;
+    app.ui.settings.addSetting({
+      id: LJNODES_NODE_TITLE_EDIT_TRIGGER,
+      name: "🧈 LJNodes: Node Title Edit Trigger",
+      defaultValue: defaultTrigger,
+      type: "combo",
+      options: (value) =>
+        [defaultTrigger, "F2"].map((m) => ({
+          value: m,
+          text: m,
+          selected: m === value,
+        })),
+    });
+  },
 
   async nodeCreated(node, app) {
     let orig_dblClick = node.onDblClick;
     node.onDblClick = function (e, pos, self) {
       orig_dblClick?.apply?.(this, arguments);
-      if(pos[1] > 0) return;
-      let prompt = window.prompt("Title", this.title);
-      if (prompt) { this.title = prompt; }
+      const setting = app.ui.settings.getSettingValue(LJNODES_NODE_TITLE_EDIT_TRIGGER, LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT);
+      if (setting === LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT) {
+        if(pos[1] > 0) return;
+        let prompt = window.prompt("Title", this.title);
+        if (prompt) { this.title = prompt; }
+      }
     }
   },
 });
@@ -76,6 +98,19 @@ LGraphCanvas.prototype.processKey = function(e) {
         rgthree.queueOutputNodes(outputNodes.map((n) => n.id));
       }
       block_default = true;
+    }
+
+    // F2, Rename Selected Node
+    if (e.key === 'F2') {
+      const setting = app.ui.settings.getSettingValue(LJNODES_NODE_TITLE_EDIT_TRIGGER, LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT);
+      if (setting === "F2") {
+        if (Object.keys(app.canvas.selected_nodes || {}).length === 1) {
+          const node = app.canvas.selected_nodes[Object.keys(app.canvas.selected_nodes)[0]];
+          let prompt = window.prompt("Title", node.title);
+          if (prompt) { node.title = prompt; }
+          block_default = true;
+        }
+      }
     }
   }
 
