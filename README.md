@@ -33,7 +33,9 @@ https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/3e410b0f-edda-4411-b3
 
 1. `Ctrl + G` to add a group for selected nodes.
 2. `Double Click` the group title to edit.
-3. `Double Click` the node title to edit.
+3. `Double Click` the node title to edit or press `F2` after selecting a node. (Choose your perference in `Settings`)
+   ![image](https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/f6bf7fb0-4eb8-45dc-bd28-db858cbc2ba2)
+
 
 https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/52abe438-8758-4e05-81c1-2b8d5a3b8f87
 
