@@ -112,6 +112,23 @@ LGraphCanvas.prototype.processKey = function(e) {
         }
       }
     }
+
+    // Ctrl + Up/Down/Left/Right, Align Selected Nodes
+    if (e.ctrlKey && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+      const nodes = app.canvas.selected_nodes;
+      if (Object.keys(nodes).length > 1) {
+        if (e.key === "ArrowUp") {
+          LGraphCanvas.alignNodes(nodes, "top");
+        } else if (e.key === "ArrowDown") {
+          LGraphCanvas.alignNodes(nodes, "bottom");
+        } else if (e.key === "ArrowLeft") {
+          LGraphCanvas.alignNodes(nodes, "left");
+        } else if (e.key === "ArrowRight") {
+          LGraphCanvas.alignNodes(nodes, "right");
+        }
+        block_default = true;
+      }
+    }
   }
 
   this.graph.change();
