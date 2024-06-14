@@ -1,5 +1,10 @@
 import { app } from "../../scripts/app.js";
-import { clickedOnGroupTitle, addNodesToGroup, getOutputNodesFromSelected, defaultGetSlotMenuOptions } from "./utils.js";
+import { clickedOnGroupTitle, 
+         addNodesToGroup, 
+         getOutputNodesFromSelected, 
+         defaultGetSlotMenuOptions, 
+         distributeNodesEvenly
+       } from "./utils.js";
 
 const LJNODES_NODE_TITLE_EDIT_TRIGGER = "Comfy.LJNodes.UIHelpers.NodeTitleEditTrigger";
 const LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT = "Double Click";
@@ -125,6 +130,19 @@ LGraphCanvas.prototype.processKey = function(e) {
           LGraphCanvas.alignNodes(nodes, "left");
         } else if (e.key === "d") {
           LGraphCanvas.alignNodes(nodes, "right");
+        }
+        block_default = true;
+      }
+    }
+
+    // Alt + H/V, Distrubute Vertical/Horizontal Spacing
+    if (e.altKey && ["h", "v"].includes(e.key)) {
+      const nodes = app.canvas.selected_nodes;
+      if (Object.keys(nodes).length > 2) {
+        if (e.key === "h") {
+          distributeNodesEvenly(nodes, "horizontal");
+        } else if (e.key === "v") {
+          distributeNodesEvenly(nodes, "vertical");
         }
         block_default = true;
       }

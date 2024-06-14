@@ -100,3 +100,38 @@ export function defaultGetSlotMenuOptions(slot) {
   }
   return menu_info;
 }
+
+
+export function distributeNodesEvenly(nodes, direction) {
+  if (!nodes) {
+    return;
+  }
+
+  const canvas = LGraphCanvas.active_canvas;
+  const directionIndex = direction === "horizontal" ? 0 : 1;
+
+  // Extract node objects from nodes object
+  let nodeArray = Object.values(nodes);
+
+  // Sort nodes by position
+  nodeArray.sort((a, b) => a.pos[directionIndex] - b.pos[directionIndex]);
+
+  // Calculate total space, which is the distance between the first and last node
+  let totalSpace = nodeArray[nodeArray.length - 1].pos[directionIndex] - nodeArray[0].pos[directionIndex];
+
+  // Calculate total size of nodes, excluding the last node
+  let totalSize = nodeArray.slice(0, -1).reduce((total, node) => total + node.size[directionIndex], 0);
+
+  // Calculate space between nodes
+  let spaceBetween = (totalSpace - totalSize) / (nodeArray.length - 1);
+
+  // Distribute nodes
+  let currentPosition = nodeArray[0].pos[directionIndex] + nodeArray[0].size[directionIndex] + spaceBetween;
+  for (let i = 1; i < nodeArray.length - 1; i++) {
+    nodeArray[i].pos[directionIndex] = currentPosition;
+    currentPosition += nodeArray[i].size[directionIndex] + spaceBetween;
+  }
+
+  canvas.dirty_canvas = true;
+  canvas.dirty_bgcanvas = true;
+};
