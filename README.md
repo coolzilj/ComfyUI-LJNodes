@@ -48,10 +48,10 @@ https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/2675699e-dce5-4c82-9c
 5. `Rright Click` on slots to call `Add Reroute in between` in the slot menu options.
 
 
-https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/837b33a6-aaf4-40ab-9882-3a905a12a628
+https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/5c4626b0-4f19-4999-8d5e-d14cbcf95c82
 
 
-6. `Ctrl + Up/Down/Left/Right` to align selected nodes.
+6. `Alt + W/S/A/D` to align selected nodes.
 
 ## Last but not lease
 If you find it useful or have special needs in your workflow, I'm open to your feedback.  
