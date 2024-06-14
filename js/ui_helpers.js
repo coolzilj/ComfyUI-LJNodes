@@ -113,17 +113,17 @@ LGraphCanvas.prototype.processKey = function(e) {
       }
     }
 
-    // Ctrl + Up/Down/Left/Right, Align Selected Nodes
-    if (e.ctrlKey && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+    // Alt + W/S/A/D, Align Selected Nodes
+    if (e.altKey && ["w", "s", "a", "d"].includes(e.key)) {
       const nodes = app.canvas.selected_nodes;
       if (Object.keys(nodes).length > 1) {
-        if (e.key === "ArrowUp") {
+        if (e.key === "w") {
           LGraphCanvas.alignNodes(nodes, "top");
-        } else if (e.key === "ArrowDown") {
+        } else if (e.key === "s") {
           LGraphCanvas.alignNodes(nodes, "bottom");
-        } else if (e.key === "ArrowLeft") {
+        } else if (e.key === "a") {
           LGraphCanvas.alignNodes(nodes, "left");
-        } else if (e.key === "ArrowRight") {
+        } else if (e.key === "d") {
           LGraphCanvas.alignNodes(nodes, "right");
         }
         block_default = true;
