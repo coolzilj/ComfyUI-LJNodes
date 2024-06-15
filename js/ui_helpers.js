@@ -8,11 +8,14 @@ import { clickedOnGroupTitle,
 
 const LJNODES_NODE_TITLE_EDIT_TRIGGER = "Comfy.LJNodes.UIHelpers.NodeTitleEditTrigger";
 const LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT = "Double Click";
+const LJNODES_GROUP_PADDING = "Comfy.LJNodes.UIHelpers.GroupPadding";
+const LJNODES_GROUP_PADDING_DEFAULT = 10;
 
 app.registerExtension({
   name: "Comfy.LJNodes.UIHelpers",
 
   init() {
+    // UI Setting: Node Title Edit Trigger
     const defaultTrigger = LJNODES_NODE_TITLE_EDIT_TRIGGER_DEFAULT;
     app.ui.settings.addSetting({
       id: LJNODES_NODE_TITLE_EDIT_TRIGGER,
@@ -25,6 +28,15 @@ app.registerExtension({
           text: m,
           selected: m === value,
         })),
+    });
+
+    // UI Setting: Group Padding
+    const defaultPadding = LJNODES_GROUP_PADDING_DEFAULT;
+    app.ui.settings.addSetting({
+      id: LJNODES_GROUP_PADDING,
+      name: "🧈 LJNodes: Group Padding",
+      defaultValue: defaultPadding,
+      type: "number",
     });
   },
 
@@ -90,7 +102,8 @@ LGraphCanvas.prototype.processKey = function(e) {
     if (e.key === 'g' && e.ctrlKey) {
       if (Object.keys(app.canvas.selected_nodes || {}).length) {
         var group = new LiteGraph.LGraphGroup();
-        addNodesToGroup(group, this.selected_nodes)
+        const padding = app.ui.settings.getSettingValue(LJNODES_GROUP_PADDING, LJNODES_GROUP_PADDING_DEFAULT);
+        addNodesToGroup(group, this.selected_nodes, padding);
         app.canvas.graph.add(group);
       }
       block_default = true;

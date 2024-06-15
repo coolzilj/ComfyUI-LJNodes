@@ -22,7 +22,7 @@ export function getOutputNodesFromSelected(canvas) {
   );
 }
 
-export function addNodesToGroup(group, nodes=[]) {
+export function addNodesToGroup(group, nodes=[], padding=10) {
   var x1, y1, x2, y2;
   var nx1, ny1, nx2, ny2;
   var node;
@@ -68,8 +68,6 @@ export function addNodesToGroup(group, nodes=[]) {
           }
       }
   }
-
-  var padding = 10;
 
   y1 = y1 - Math.round(group.font_size * 1.4);
 
