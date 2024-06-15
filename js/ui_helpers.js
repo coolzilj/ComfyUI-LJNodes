@@ -148,7 +148,7 @@ LGraphCanvas.prototype.processKey = function(e) {
       }
     }
 
-    // Alt + H/V, Distrubute Vertical/Horizontal Spacing
+    // Alt + H/V, Distribute Vertical/Horizontal Spacing
     if (e.altKey && ["h", "v"].includes(e.key)) {
       const nodes = app.canvas.selected_nodes;
       if (Object.keys(nodes).length > 2) {

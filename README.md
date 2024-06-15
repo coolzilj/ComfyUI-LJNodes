@@ -52,7 +52,7 @@ https://github.com/coolzilj/ComfyUI-LJNodes/assets/1059327/7f1ad411-1f7f-40e6-99
 
 
 6. `Alt + W/S/A/D` to align selected nodes.
-7. `Alt + H/V` to distrubute horizontal/vertical spacing evenly.
+7. `Alt + H/V` to distribute horizontal/vertical spacing evenly.
 
 ## Last but not lease
 If you find it useful or have special needs in your workflow, I'm open to your feedback.  
